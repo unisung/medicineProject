@@ -1,0 +1,25 @@
+<!-- templates/your_app/seoul_hospital_plots.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seoul Hospital Plots</title>
+    <!-- Add Plotly CDN for the JavaScript library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Seoul Hospital Plots</h1>
+
+    <h2>Interactive Scatter Plot of Total Doctors in Seoul by District</h2>
+    <div id="scatter_plot_div">{{ scatter_plot_html|safe }}</div>
+
+    <h2>Interactive Bar Plot of Total Doctors in Seoul by District</h2>
+    <div id="bar_plot_div">{{ bar_plot_html|safe }}</div>
+
+    <h2>Interactive Count Plot of Districts in Seoul</h2>
+    <div id="count_plot_div">{{ count_plot_html|safe }}</div>
+
+    <h2>Interactive Scatter Plot of Geographical Distribution of Hospitals in Seoul</h2>
+    <div id="geographical_plot_div">{{ geographical_plot_html|safe }}</div>
+</body>
+</html>

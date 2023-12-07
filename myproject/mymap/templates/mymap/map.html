@@ -1,0 +1,16 @@
+<!-- templates/mymap/map.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seoul Population Map</title>
+    <!-- Add this in the <head> section of your HTML template -->
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Add any additional CSS or script links here -->
+</head>
+<body>
+    <h1>Seoul Population Map</h1>
+    <div id="div_map">
+        {{ plot_div|safe }}
+    </div>
+</body>
+</html>

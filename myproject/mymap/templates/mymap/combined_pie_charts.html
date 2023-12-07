@@ -1,0 +1,19 @@
+<!-- templates/your_app/combined_pie_charts.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combined Pie Charts</title>
+    <!-- Add Plotly CDN for the JavaScript library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Combined Pie Charts</h1>
+
+    <h2>Simple Pie Chart</h2>
+    <div id="simple_pie_chart_div">{{ simple_pie_html|safe }}</div>
+
+    <h2>Interactive Pie Chart with Custom Wedge Properties</h2>
+    <div id="interactive_pie_chart_div">{{ interactive_pie_html|safe }}</div>
+</body>
+</html>
