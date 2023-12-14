@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}  
+  <div class="col-sm-9" style="background:#98B4D4">
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <h1>Combined Pie Charts</h1>
+
+    <h2>Simple Pie Chart</h2>
+    <div id="simple_pie_chart_div">{{ simple_pie_html|safe }}</div>
+
+    <h2>Interactive Pie Chart with Custom Wedge Properties</h2>
+    <div id="interactive_pie_chart_div">{{ interactive_pie_html|safe }}</div>
+
+</div>
+{% endblock %}

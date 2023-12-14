@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+  <div class="col-sm-9" style="background:#C3447A">
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+   <h1>Hospital Chart</h1>
+
+    <!-- Render the Plotly chart using the plot_html variable -->
+    {{ plot_html|safe }}
+
+  </div>
+{% endblock %}

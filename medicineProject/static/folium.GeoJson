@@ -1,0 +1,23 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "강남구"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [127.04788, 37.45196],
+                        [127.09951, 37.45196],
+                        [127.09951, 37.48176],
+                        [127.04788, 37.48176],
+                        [127.04788, 37.45196]
+                    ]
+                ]
+            }
+        }
+    ]
+}

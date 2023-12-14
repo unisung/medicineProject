@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+  <div class="col-sm-9" style="background-color:#34568B">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <h1>Seoul Population Map</h1>
+    <div id="div_map">
+        {{ plot_div|safe }}
+    </div>
+   </div>
+{% endblock %}
