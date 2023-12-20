@@ -57,7 +57,8 @@ def map_population(request):
 
 #fig
     # Generate HTML code for the figure
-    plot_div = opy.plot(fig, auto_open=False, output_type='div')
+    plot_div = opy.plot(fig, auto_open=False, output_type='div', include_plotlyjs=False, show_link=False)
+    plot_div = plot_div.replace('<div>', f'<div style="width: 100%; height: 75vh;">', 1)
 
     # Pass the plot_div variable to the template
     return render(request,'medicmap/map_population.html',{'plot_div': plot_div})
@@ -66,20 +67,20 @@ def district_graph(request):
 
     # CSV file path
     csv_file_path = os.path.join(settings.BASE_DIR, 'static', '서울병원정보서비스.csv')
-
     # Read CSV file into a DataFrame
     df = pd.read_csv(csv_file_path, encoding='UTF-8')
-
     # Group by '시군구명' and count the number of hospitals
     df_mpg = df.groupby('시군구명', as_index=False).agg(n=('시군구명', 'count')).sort_values('n', ascending=False)
-
     # Create an interactive bar chart using Plotly Express
-    fig = px.bar(df_mpg, x='시군구명', y='n', labels={'n': 'Number of Hospitals'}, title='Hospital Chart')
-
-    # Convert the plot to HTML
+    fig = px.bar(df_mpg, x='시군구명', y='n', labels={'n': 'Number of Hospitals'}, width = 1000, height = 350)
+     # Convert the plot to HTML
     plot_html = fig.to_html(full_html=False)
 
-    return render(request, 'medicmap/district_graph.html', {'plot_html': plot_html})
+    df_mpg2 = df.groupby('시군구명', as_index=False).agg(n=('시군구명', 'count')).sort_values('n', ascending=False)
+    fig = px.scatter(df_mpg2, x='시군구명', y='n', labels={'n': '수'},  width = 1000, height = 350)
+    plot_html2 = fig.to_html(full_html=False)
+
+    return render(request, 'medicmap/district_graph.html', {'plot_html': plot_html, 'plot_html2': plot_html2})
 
 from django.shortcuts import render
 import folium
@@ -178,14 +179,15 @@ def district_pie_chart(request):
     values = [2837, 1402, 1246, 932, 875, 799, 766, 754, 708, 705, 664, 605, 596, 594, 588, 570, 556, 547, 482, 472, 461, 444, 377, 365, 323]
 
     # Create a simple pie chart using Plotly Express
-    fig_simple_pie = px.pie(names=labels, values=values, title='Distribution of Hospitals in Seoul by District')
+    fig_simple_pie = px.pie(names=labels, values=values, title='Distribution of Hospitals in Seoul by District',
+                            width=400, height=960,)
 
     # Convert Plotly Express simple pie chart to HTML
     simple_pie_html = fig_simple_pie.to_html(full_html=False)
 
     # Create an interactive pie chart with custom wedge properties using Plotly Express
     fig_interactive_pie = px.pie(names=labels, values=values, title='Distribution of Hospitals in Seoul by District',
-                                width=500, height=500,
+                                width=450, height=960,
                                 template='seaborn',  # You can change the template if needed
                                 )
 
@@ -209,7 +211,19 @@ def district_distribution(request):
     return render(request,'medicmap/district_distribution.html')
 
 def medical_institution_types(request):
-    return render(request,'medicmap/medical_institution_types.html')
+    csv_file_path = os.path.join(settings.BASE_DIR, 'static', '서울병원정보서비스.csv')
+    df = pd.read_csv(csv_file_path, encoding='UTF-8')
+
+    df_mpg1 = df.groupby('종별명', as_index=False).agg(n=('시군구명', 'count')).sort_values('n', ascending=False)
+    fig = px.line(df_mpg1, x='종별명', y='n', labels={'n': '수'}, title='line Chart', width=960,height=560)
+    plot_html1 = fig.to_html(full_html=False)
+
+    df_mpg2 = df.groupby('종별명', as_index=False).agg(n=('시군구명', 'count')).sort_values('n', ascending=False)
+    fig = px.bar(df_mpg2, x='n', y='종별명', labels={'n': '수'}, title='graph Chart', width=960,height=560)
+    plot_html2 = fig.to_html(full_html=False)
+
+
+    return render(request,'medicmap/medical_institution_types.html', {'plot_html1': plot_html1, 'plot_html2': plot_html2})
 
 def district_total_doctors(request):
     return render(request,'medicmap/district_total_doctors.html')
